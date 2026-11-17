@@ -9,7 +9,7 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'build'
-SITE_URL = 'https://travel-finds.vercel.app'
+SITE_URL = 'https://travel-finds-valdislavn-1094.vercel.app'
 LINKS = json.load(open(ROOT / 'config/links.generated.json', encoding='utf-8'))
 
 NAMES = {'kiwi':'Kiwi.com','klook':'Klook','saily':'Saily','gocity':'Go City','yesim':'Yesim','airalo':'Airalo',
