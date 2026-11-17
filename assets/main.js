@@ -33,6 +33,10 @@
   }
 
   function appendUtm(target, campaign, content) {
+    // UTM contract: source=seo_en|seo_es, medium=seo (used only for long targets).
+    // NOTE: for pre-generated branded short links (?tpk.ro) query params are not
+    // documented, so UTM is only used when a *long* target URL is wrapped later
+    // (Links API converts longURL + UTM into a short partner link server-side).
     var lang = (document.documentElement.lang || "en").toLowerCase();
     var params = {
       utm_source: lang === "es" ? "seo_es" : "seo_en",
@@ -58,11 +62,15 @@
     if (!programInfo) {
       return null;
     }
+    // Links API bakes sub_id into a short link, so each language needs its own
+    // seo_en / seo_es link (programInfo.urls.{en,es}); fallback — programInfo.url.
     var lang = (document.documentElement.lang || "en").toLowerCase();
     var url = (programInfo.urls && programInfo.urls[lang]) || programInfo.url;
     if (isPlaceholderValue(url)) {
       return null;
     }
+    // 2026: no tp.media/r links in the browser; deep links are converted via
+    // the TravelPayouts Links API (tools/links_api.py) in the content pipeline.
     if (target && programInfo.deeplinkTemplate) {
       return programInfo.deeplinkTemplate
         .replace("{url}", url)
@@ -104,7 +112,7 @@
       var url = affiliateUrl(program, target);
       if (!url) {
         card.setAttribute("aria-disabled", "true");
-        card.setAttribute("title", "Партнёрские ссылки появятся после настройки site/assets/site-config.js");
+        card.setAttribute("title", "Ссылка для этой программы пока недоступна");
         card.addEventListener("click", function (event) {
           event.preventDefault();
         });
@@ -134,5 +142,20 @@
     document.addEventListener("DOMContentLoaded", init);
   } else {
     init();
+  }
+})();
+
+(function(){
+  var toggle=document.querySelector("[data-menu-toggle]");
+  var nav=document.querySelector("[data-nav]");
+  if(toggle && nav){
+    function closeMenu(){toggle.setAttribute("aria-expanded","false");nav.classList.remove("is-open");}
+    toggle.addEventListener("click",function(){
+      var open=toggle.getAttribute("aria-expanded")==="true";
+      toggle.setAttribute("aria-expanded",open?"false":"true");
+      if(open){nav.classList.remove("is-open");}else{nav.classList.add("is-open");}
+    });
+    nav.querySelectorAll("a").forEach(function(link){link.addEventListener("click",closeMenu);});
+    document.addEventListener("keydown",function(event){if(event.key==="Escape"){closeMenu();}});
   }
 })();

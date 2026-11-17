@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://valdislavn-spec.github.io/travel-finds/</loc></url>
-  <url><loc>https://valdislavn-spec.github.io/travel-finds/es.html</loc></url>
+  <url><loc>https://travel-finds.vercel.app/</loc></url>
+  <url><loc>https://travel-finds.vercel.app/es.html</loc></url>
+  <url><loc>https://travel-finds.vercel.app/blog/</loc></url>
+  <url><loc>https://travel-finds.vercel.app/es/blog/</loc></url>
+  <url><loc>https://travel-finds.vercel.app/blog/how-to-find-cheap-flights-2026.html</loc></url>
+  <url><loc>https://travel-finds.vercel.app/blog/train-bus-plane-europe-compare.html</loc></url>
+  <url><loc>https://travel-finds.vercel.app/blog/cheap-city-breaks-europe-2026.html</loc></url>
+  <url><loc>https://travel-finds.vercel.app/blog/flexible-dates-cheaper-flights.html</loc></url>
+  <url><loc>https://travel-finds.vercel.app/es/blog/escapadas-economicas-europa-2026.html</loc></url>
+  <url><loc>https://travel-finds.vercel.app/es/blog/fechas-flexibles-vuelos-baratos.html</loc></url>
 </urlset>

@@ -1,0 +1,360 @@
+{
+ "generated_at": "2026-11-08",
+ "market": "non_ru",
+ "marker": 674170,
+ "note": "Публичные короткие ссылки TravelPayouts для не-РФ линии. erid не требуется (аудитория вне РФ). Проекты: telegram 597635 (messenger-каналы), website 597672 (сайт/Pinterest). Ссылки проверены 302 на бренд.",
+ "projects": {
+  "telegram": 597635,
+  "website": 597672
+ },
+ "channels": {
+  "tg_en_deals": {
+   "project": "telegram",
+   "trs": 597635,
+   "sub_id": "tg_en_deals",
+   "programs": {
+    "yesim": {
+     "url": "https://yesim.tpk.ro/6iabSSA7",
+     "campaign_id": 224
+    },
+    "airalo": {
+     "url": "https://airalo.tpk.ro/ZVbM6dQc",
+     "campaign_id": 541
+    },
+    "kiwitaxi": {
+     "url": "https://kiwitaxi.tpk.ro/yLGsxlZ1",
+     "campaign_id": 1
+    },
+    "localrent": {
+     "url": "https://localrent.tpk.ro/vGHu8Vuj",
+     "campaign_id": 87
+    },
+    "gettransfer": {
+     "url": "https://gettransfer.tpk.ro/TwS4rDsN",
+     "campaign_id": 147
+    },
+    "wegotrip": {
+     "url": "https://wegotrip.tpk.ro/XjOFxZnj",
+     "campaign_id": 150
+    },
+    "kkday": {
+     "url": "https://kkday.tpk.ro/V16znk9Z",
+     "campaign_id": 633
+    },
+    "tiqets": {
+     "url": "https://tiqets.tpk.ro/2i59TabZ",
+     "campaign_id": 89
+    },
+    "welcomepickups": {
+     "url": "https://tpk.ro/JLy454hn",
+     "campaign_id": 627
+    },
+    "intui": {
+     "url": "https://intui.tpk.ro/WtRZcBkQ",
+     "campaign_id": 22
+    },
+    "qeeq": {
+     "url": "https://qeeq.tpk.ro/GyMAxFey",
+     "campaign_id": 172
+    },
+    "radicalstorage": {
+     "url": "https://radicalstorage.tpk.ro/uUZVvj1P",
+     "campaign_id": 209
+    },
+    "airhelp": {
+     "url": "https://airhelp.tpk.ro/OJNoaeHD",
+     "campaign_id": 120
+    },
+    "compensair": {
+     "url": "https://compensair.tpk.ro/deANAYsd",
+     "campaign_id": 86
+    },
+    "economybookings": {
+     "url": "https://economybookings.tpk.ro/Kz3xifq2",
+     "campaign_id": 10
+    },
+    "getrentacar": {
+     "url": "https://getrentacar.tpk.ro/AUiYzCmt",
+     "campaign_id": 222
+    },
+    "bikesbooking": {
+     "url": "https://bikesbooking.tpk.ro/End6vrf2",
+     "campaign_id": 57
+    },
+    "drimsim": {
+     "url": "https://drimsim.tpk.ro/fi0ppdKR",
+     "campaign_id": 102
+    }
+   }
+  },
+  "tg_es_deals": {
+   "project": "telegram",
+   "trs": 597635,
+   "sub_id": "tg_es_deals",
+   "programs": {
+    "yesim": {
+     "url": "https://yesim.tpk.ro/KvIgfcgw",
+     "campaign_id": 224
+    },
+    "airalo": {
+     "url": "https://airalo.tpk.ro/Suq9gZw9",
+     "campaign_id": 541
+    },
+    "kiwitaxi": {
+     "url": "https://kiwitaxi.tpk.ro/tOA4HQXh",
+     "campaign_id": 1
+    },
+    "localrent": {
+     "url": "https://localrent.tpk.ro/mlqpVcXV",
+     "campaign_id": 87
+    },
+    "gettransfer": {
+     "url": "https://gettransfer.tpk.ro/ltyO9cWW",
+     "campaign_id": 147
+    },
+    "wegotrip": {
+     "url": "https://wegotrip.tpk.ro/vI0t4DcZ",
+     "campaign_id": 150
+    },
+    "kkday": {
+     "url": "https://kkday.tpk.ro/fJgn9Jym",
+     "campaign_id": 633
+    },
+    "tiqets": {
+     "url": "https://tiqets.tpk.ro/7Su1dk8h",
+     "campaign_id": 89
+    },
+    "welcomepickups": {
+     "url": "https://tpk.ro/CGAoThwm",
+     "campaign_id": 627
+    },
+    "intui": {
+     "url": "https://intui.tpk.ro/cCWtvcCu",
+     "campaign_id": 22
+    },
+    "qeeq": {
+     "url": "https://qeeq.tpk.ro/M8hzgrDK",
+     "campaign_id": 172
+    },
+    "radicalstorage": {
+     "url": "https://radicalstorage.tpk.ro/2flkFtrR",
+     "campaign_id": 209
+    },
+    "airhelp": {
+     "url": "https://airhelp.tpk.ro/vfYgXAit",
+     "campaign_id": 120
+    },
+    "compensair": {
+     "url": "https://compensair.tpk.ro/5wZ3FRCq",
+     "campaign_id": 86
+    },
+    "economybookings": {
+     "url": "https://economybookings.tpk.ro/IJSEj8iJ",
+     "campaign_id": 10
+    },
+    "getrentacar": {
+     "url": "https://getrentacar.tpk.ro/DtPcP9oZ",
+     "campaign_id": 222
+    },
+    "bikesbooking": {
+     "url": "https://bikesbooking.tpk.ro/AOFSBMjK",
+     "campaign_id": 57
+    },
+    "drimsim": {
+     "url": "https://drimsim.tpk.ro/d8v6BOor",
+     "campaign_id": 102
+    }
+   }
+  },
+  "seo_en": {
+   "project": "website",
+   "trs": 597672,
+   "sub_id": "seo_en",
+   "programs": {
+    "yesim": {
+     "url": "https://yesim.tpk.ro/uzjpBpju",
+     "campaign_id": 224
+    },
+    "airalo": {
+     "url": "https://airalo.tpk.ro/IQhjJkbT",
+     "campaign_id": 541
+    },
+    "kiwitaxi": {
+     "url": "https://kiwitaxi.tpk.ro/xmQYmqIl",
+     "campaign_id": 1
+    },
+    "localrent": {
+     "url": "https://localrent.tpk.ro/edD3Ejwe",
+     "campaign_id": 87
+    },
+    "gettransfer": {
+     "url": "https://gettransfer.tpk.ro/sMmU1wE7",
+     "campaign_id": 147
+    },
+    "wegotrip": {
+     "url": "https://wegotrip.tpk.ro/TcEWZpeL",
+     "campaign_id": 150
+    },
+    "kkday": {
+     "url": "https://kkday.tpk.ro/11CJTQvo",
+     "campaign_id": 633
+    },
+    "kiwi": {
+     "url": "https://kiwi.tpk.ro/RJINNJJm",
+     "campaign_id": 111
+    },
+    "klook": {
+     "url": "https://klook.tpk.ro/2NhHWOSD",
+     "campaign_id": 137
+    },
+    "saily": {
+     "url": "https://saily.tpk.ro/QSNyiXp7",
+     "campaign_id": 629
+    },
+    "gocity": {
+     "url": "https://gocity.tpk.ro/yoqmgDkj",
+     "campaign_id": 62
+    },
+    "tiqets": {
+     "url": "https://tiqets.tpk.ro/ufgJDVmO",
+     "campaign_id": 89
+    },
+    "welcomepickups": {
+     "url": "https://tpk.ro/kTevGAQP",
+     "campaign_id": 627
+    },
+    "intui": {
+     "url": "https://intui.tpk.ro/JYhdeSpv",
+     "campaign_id": 22
+    },
+    "qeeq": {
+     "url": "https://qeeq.tpk.ro/9W1Pi9hm",
+     "campaign_id": 172
+    },
+    "radicalstorage": {
+     "url": "https://radicalstorage.tpk.ro/wskVrPYh",
+     "campaign_id": 209
+    },
+    "airhelp": {
+     "url": "https://airhelp.tpk.ro/rZjahO3R",
+     "campaign_id": 120
+    },
+    "compensair": {
+     "url": "https://compensair.tpk.ro/4klXfGpD",
+     "campaign_id": 86
+    },
+    "economybookings": {
+     "url": "https://economybookings.tpk.ro/IwQqKHL3",
+     "campaign_id": 10
+    },
+    "getrentacar": {
+     "url": "https://getrentacar.tpk.ro/tyEGMAcd",
+     "campaign_id": 222
+    },
+    "bikesbooking": {
+     "url": "https://bikesbooking.tpk.ro/9uE68tsc",
+     "campaign_id": 57
+    },
+    "drimsim": {
+     "url": "https://drimsim.tpk.ro/h0zgCp8l",
+     "campaign_id": 102
+    }
+   }
+  },
+  "seo_es": {
+   "project": "website",
+   "trs": 597672,
+   "sub_id": "seo_es",
+   "programs": {
+    "yesim": {
+     "url": "https://yesim.tpk.ro/KqpvuYgm",
+     "campaign_id": 224
+    },
+    "airalo": {
+     "url": "https://airalo.tpk.ro/d7nb7Ia1",
+     "campaign_id": 541
+    },
+    "kiwitaxi": {
+     "url": "https://kiwitaxi.tpk.ro/8bXhqjhr",
+     "campaign_id": 1
+    },
+    "localrent": {
+     "url": "https://localrent.tpk.ro/ydfIqxMB",
+     "campaign_id": 87
+    },
+    "gettransfer": {
+     "url": "https://gettransfer.tpk.ro/JDmaFK1V",
+     "campaign_id": 147
+    },
+    "wegotrip": {
+     "url": "https://wegotrip.tpk.ro/spVZjGYY",
+     "campaign_id": 150
+    },
+    "kkday": {
+     "url": "https://kkday.tpk.ro/ry2i9cAM",
+     "campaign_id": 633
+    },
+    "kiwi": {
+     "url": "https://kiwi.tpk.ro/n2alia22",
+     "campaign_id": 111
+    },
+    "klook": {
+     "url": "https://klook.tpk.ro/RmERIKIk",
+     "campaign_id": 137
+    },
+    "saily": {
+     "url": "https://saily.tpk.ro/bl3wt2mK",
+     "campaign_id": 629
+    },
+    "gocity": {
+     "url": "https://gocity.tpk.ro/zbvrGR7x",
+     "campaign_id": 62
+    },
+    "tiqets": {
+     "url": "https://tiqets.tpk.ro/yOOugbiR",
+     "campaign_id": 89
+    },
+    "welcomepickups": {
+     "url": "https://tpk.ro/KCSE22Ql",
+     "campaign_id": 627
+    },
+    "intui": {
+     "url": "https://intui.tpk.ro/j8tKOz7A",
+     "campaign_id": 22
+    },
+    "qeeq": {
+     "url": "https://qeeq.tpk.ro/Mw47Vx7w",
+     "campaign_id": 172
+    },
+    "radicalstorage": {
+     "url": "https://radicalstorage.tpk.ro/jbzaVSbJ",
+     "campaign_id": 209
+    },
+    "airhelp": {
+     "url": "https://airhelp.tpk.ro/NRpvyTiF",
+     "campaign_id": 120
+    },
+    "compensair": {
+     "url": "https://compensair.tpk.ro/yQHrE3WB",
+     "campaign_id": 86
+    },
+    "economybookings": {
+     "url": "https://economybookings.tpk.ro/fuPAIPZw",
+     "campaign_id": 10
+    },
+    "getrentacar": {
+     "url": "https://getrentacar.tpk.ro/9U8VoZc6",
+     "campaign_id": 222
+    },
+    "bikesbooking": {
+     "url": "https://bikesbooking.tpk.ro/TLlUHPpM",
+     "campaign_id": 57
+    },
+    "drimsim": {
+     "url": "https://drimsim.tpk.ro/kDmsg3sw",
+     "campaign_id": 102
+    }
+   }
+  }
+ }
+}
