@@ -48,9 +48,8 @@ jobs:
             --include-fragments
             --exclude '^https://nonamemac-cyber\.github\.io'
             --no-progress
-            --format markdown
-            --output lychee-internal.md
             './_src/build/**/*.html'
+          output: lychee-internal.md
           fail: true
 
       - name: Upload audit report

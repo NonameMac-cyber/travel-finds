@@ -39,9 +39,8 @@ jobs:
             --include-fragments
             --exclude '^https://nonamemac-cyber\.github\.io'
             --no-progress
-            --format markdown
-            --output lychee-internal.md
             './_src/build/**/*.html'
+          output: lychee-internal.md
           fail: true
 
       - name: Check external links
@@ -50,14 +49,13 @@ jobs:
           args: >-
             --no-progress
             --accept 200,204,206,301,302,307,308,403,429
-            --exclude-mail
+            --exclude '^https://nonamemac-cyber\.github\.io'
             --exclude '^https://fonts\.googleapis\.com/?$'
             --exclude '^https://fonts\.gstatic\.com/?$'
             --max-concurrency 8
-            --timeout 20
-            --format markdown
-            --output lychee-external.md
+            --timeout 30
             './_src/build/**/*.html'
+          output: lychee-external.md
           fail: false
 
       - name: Upload audit reports
