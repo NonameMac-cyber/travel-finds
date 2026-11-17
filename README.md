@@ -2,20 +2,12 @@
 
 Статический сайт Travel Finds: лендинги EN/ES, блог, партнёрские ссылки TravelPayouts.
 
-- Live: https://nonamemac-cyber.github.io/travel-finds
+- Live (GitHub Pages): https://nonamemac-cyber.github.io/travel-finds/
+- Vercel: https://travel-finds.vercel.app
 - EN: `index.html`
 - ES: `es.html`
 - Гайды: `blog/*.html`, `es/blog/*.html`
 - Стили/скрипты: `assets/`
-
-## Автодеплой
-
-Проект Vercel `valdislavn-1094/travel-finds` подключён к этому репозиторию.
-Пуш в ветку `main` запускает автоматический production-деплой.
-Pull request создаёт preview-деплой.
-
-Vercel сам запускает `python3 _src/tools/build_site.py` и публикует
-готовую статику из `_src/build/`.
 
 ## Исходники и сборка
 
@@ -32,8 +24,23 @@ Vercel сам запускает `python3 _src/tools/build_site.py` и публ�
 python3 _src/tools/build_site.py
 ```
 
-Скрипт собирает сайт в `_src/build/` и публикует готовые файлы в корень репозитория.
-Корень репозитория — то, что деплоит Vercel.
+Скрипт собирает сайт в `_src/build/` и публикует готовые файлы в корень
+репозитория для локального просмотра. На Vercel публикация в корень
+отключается автоматически: Vercel забирает результат прямо из `_src/build/`.
+
+## Автодеплой
+
+Vercel-проект `valdislavn-1094/travel-finds` подключён к репозиторию.
+Пуш в `main` запускает production-деплой Vercel.
+
+GitHub Actions workflow `.github/workflows/pages.yml` при каждом пуше в `main`:
+
+1. собирает сайт;
+2. проверяет ключевые файлы;
+3. публикует готовую статику в ветку `gh-pages`.
+
+GitHub Pages настроен на ветку `gh-pages` (folder `/ (root)`), поэтому
+`https://nonamemac-cyber.github.io/travel-finds/` обновляется автоматически.
 
 ## Правовое
 
@@ -41,31 +48,3 @@ python3 _src/tools/build_site.py
 перед покупкой проверяйте у провайдера. Это не финансовая рекомендация.
 Дизайн основан на MIT-шаблоне Trippi; лицензия лежит в
 `assets/vendor/trippi-LICENSE.txt`.
-
-
-## Резервный хостинг
-
-В репозитории есть workflow `.github/workflows/pages.yml` для GitHub Pages.
-Чтобы включить его, один раз открой:
-
-https://github.com/NonameMac-cyber/travel-finds/settings/pages
-
-и выбери **Source: GitHub Actions**. После этого workflow будет публиковать
-сайт на `https://nonamemac-cyber.github.io/travel-finds/`.
-
-Vercel при этом остаётся основным production-хостингом.
-
-## GitHub Actions
-
-Workflow `.github/workflows/pages.yml` собирает сайт и публикует готовую статику
-в ветку `gh-pages` при каждом пуше в `main`.
-
-Чтобы включить GitHub Pages:
-
-1. Открой `Settings -> Pages`.
-2. В **Build and deployment** выбери **Deploy from a branch**.
-3. Branch: `gh-pages`, folder: `/ (root)`.
-4. Нажми **Save**.
-
-После этого сайт будет доступен по адресу
-`https://nonamemac-cyber.github.io/travel-finds/`.
