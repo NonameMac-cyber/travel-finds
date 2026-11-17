@@ -54,3 +54,18 @@ https://github.com/NonameMac-cyber/travel-finds/settings/pages
 сайт на `https://nonamemac-cyber.github.io/travel-finds/`.
 
 Vercel при этом остаётся основным production-хостингом.
+
+## GitHub Actions
+
+Workflow `.github/workflows/pages.yml` собирает сайт и публикует готовую статику
+в ветку `gh-pages` при каждом пуше в `main`.
+
+Чтобы включить GitHub Pages:
+
+1. Открой `Settings -> Pages`.
+2. В **Build and deployment** выбери **Deploy from a branch**.
+3. Branch: `gh-pages`, folder: `/ (root)`.
+4. Нажми **Save**.
+
+После этого сайт будет доступен по адресу
+`https://nonamemac-cyber.github.io/travel-finds/`.
