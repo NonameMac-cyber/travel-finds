@@ -41,3 +41,16 @@ python3 _src/tools/build_site.py
 перед покупкой проверяйте у провайдера. Это не финансовая рекомендация.
 Дизайн основан на MIT-шаблоне Trippi; лицензия лежит в
 `assets/vendor/trippi-LICENSE.txt`.
+
+
+## Резервный хостинг
+
+В репозитории есть workflow `.github/workflows/pages.yml` для GitHub Pages.
+Чтобы включить его, один раз открой:
+
+https://github.com/NonameMac-cyber/travel-finds/settings/pages
+
+и выбери **Source: GitHub Actions**. После этого workflow будет публиковать
+сайт на `https://nonamemac-cyber.github.io/travel-finds/`.
+
+Vercel при этом остаётся основным production-хостингом.
