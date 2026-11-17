@@ -64,7 +64,7 @@ window.TRAVEL_CONFIG = {
       label: "Trip.com",
     },
   },
-  siteUrl: "https://travel-finds-valdislavn-1094.vercel.app",
+  siteUrl: "https://nonamemac-cyber.github.io/travel-finds",
 };
 
 window.TRAVEL_PLACEHOLDER = !window.TRAVEL_CONFIG.programs.kiwi.urls.en;

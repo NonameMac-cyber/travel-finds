@@ -2,7 +2,7 @@
 
 Статический сайт Travel Finds: лендинги EN/ES, блог, партнёрские ссылки TravelPayouts.
 
-- Live: https://travel-finds-valdislavn-1094.vercel.app
+- Live: https://nonamemac-cyber.github.io/travel-finds
 - EN: `index.html`
 - ES: `es.html`
 - Гайды: `blog/*.html`, `es/blog/*.html`
