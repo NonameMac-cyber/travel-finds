@@ -4,7 +4,7 @@
 Usage:  python3 tools/build_site.py
 Output: travel-affiliate/build/  (ready to push to the `travel-finds` GitHub repo)
 """
-import json, re, shutil, sys, tempfile
+import json, os, re, shutil, sys, tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -266,4 +266,7 @@ def publish():
 
 if __name__ == '__main__':
     build()
-    publish()
+    if os.environ.get('VERCEL') == '1':
+        print('Vercel build: skipped publishing to repository root')
+    else:
+        publish()

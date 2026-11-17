@@ -1,7 +1,6 @@
 .vercel
 .env*
 .gitignore
-_src
 _worker.js
 README.md
 LICENSE

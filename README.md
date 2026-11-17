@@ -14,6 +14,9 @@
 Пуш в ветку `main` запускает автоматический production-деплой.
 Pull request создаёт preview-деплой.
 
+Vercel сам запускает `python3 _src/tools/build_site.py` и публикует
+готовую статику из `_src/build/`.
+
 ## Исходники и сборка
 
 Исходники лежат в `_src/`:
