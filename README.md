@@ -48,3 +48,12 @@ GitHub Pages настроен на ветку `gh-pages` (folder `/ (root)`), п
 перед покупкой проверяйте у провайдера. Это не финансовая рекомендация.
 Дизайн основан на MIT-шаблоне Trippi; лицензия лежит в
 `assets/vendor/trippi-LICENSE.txt`.
+
+## SEO и проверка ссылок
+
+- `python3 _src/tools/seo_check.py --report _src/reports/seo-report.json` — проверяет title, description, canonical, h1, viewport, Open Graph, alt у изображений, JSON-LD и sitemap.
+- `.github/workflows/seo-audit.yml` — GitHub Actions: сборка, SEO-аудит, проверка внутренних ссылок и якорей через `lycheeverse/lychee-action`, проверка внешних ссылок и отчёт-артефакт.
+- `.github/workflows/lighthouse.yml` — Lighthouse CI для SEO, accessibility, best practices и performance после публикации GitHub Pages.
+- `.github/workflows/pages.yml` — перед публикацией в `gh-pages` запускает SEO-аудит и проверку внутренних ссылок, поэтому битая внутренняя ссылка блокирует деплой.
+- `feed.xml` генерируется автоматически; RSS подключён в `<head>` всех страниц.
+- В статьях автоматически появляется блок «Related guides» с внутренними ссылками, а на лендингах — блок «Trusted resources» с внешними источниками.

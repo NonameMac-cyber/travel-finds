@@ -1,0 +1,72 @@
+name: SEO and link audit
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  schedule:
+    - cron: '0 6 * * 1'
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Build static site
+        env:
+          VERCEL: '1'
+        run: python3 _src/tools/build_site.py
+
+      - name: SEO metadata audit
+        run: python3 _src/tools/seo_check.py --report _src/reports/seo-report.json
+
+      - name: Check internal links and anchors
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --offline
+            --include-fragments
+            --exclude '^https://nonamemac-cyber\.github\.io'
+            --no-progress
+            --format markdown
+            --output lychee-internal.md
+            './_src/build/**/*.html'
+          fail: true
+
+      - name: Check external links
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --no-progress
+            --accept 200,204,206,301,302,307,308,403,429
+            --exclude-mail
+            --exclude '^https://fonts\.googleapis\.com/?$'
+            --exclude '^https://fonts\.gstatic\.com/?$'
+            --max-concurrency 8
+            --timeout 20
+            --format markdown
+            --output lychee-external.md
+            './_src/build/**/*.html'
+          fail: false
+
+      - name: Upload audit reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: seo-link-audit
+          path: |
+            _src/reports/seo-report.json
+            lychee-internal.md
+            lychee-external.md
+          if-no-files-found: warn

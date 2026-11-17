@@ -110,12 +110,21 @@
       var program = card.getAttribute("data-affiliate-program");
       var target = card.getAttribute("data-affiliate-target") || "";
       var url = affiliateUrl(program, target);
-      if (!url) {
-        card.setAttribute("aria-disabled", "true");
-        card.setAttribute("title", "Ссылка для этой программы пока недоступна");
-        card.addEventListener("click", function (event) {
-          event.preventDefault();
-        });
+      if (url === null) {
+        // No partner link configured yet: keep a working non-affiliate link
+        // instead of leaving a dead placeholder.
+        if (target) {
+          card.setAttribute("href", target);
+          card.setAttribute("rel", "noopener");
+          card.setAttribute("target", "_blank");
+          card.removeAttribute("aria-disabled");
+        } else {
+          card.setAttribute("aria-disabled", "true");
+          card.setAttribute("title", "Link is not available yet");
+          card.addEventListener("click", function (event) {
+            event.preventDefault();
+          });
+        }
         return;
       }
       card.setAttribute("href", url);

@@ -37,6 +37,32 @@ jobs:
           test -f _src/build/sitemap.xml
           echo "Static site build verified."
 
+      - name: SEO metadata audit
+        run: python3 _src/tools/seo_check.py --report _src/reports/seo-report.json
+
+      - name: Check internal links and anchors
+        uses: lycheeverse/lychee-action@v2
+        with:
+          args: >-
+            --offline
+            --include-fragments
+            --exclude '^https://nonamemac-cyber\.github\.io'
+            --no-progress
+            --format markdown
+            --output lychee-internal.md
+            './_src/build/**/*.html'
+          fail: true
+
+      - name: Upload audit report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pages-seo-report
+          path: |
+            _src/reports/seo-report.json
+            lychee-internal.md
+          if-no-files-found: warn
+
       - name: Publish to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4
         with:

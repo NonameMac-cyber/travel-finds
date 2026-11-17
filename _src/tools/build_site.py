@@ -6,6 +6,7 @@ Output: travel-affiliate/build/  (ready to push to the `travel-finds` GitHub rep
 """
 import json, os, re, shutil, sys, tempfile
 from pathlib import Path
+from xml.sax.saxutils import escape as xml_escape
 
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'build'
@@ -69,6 +70,8 @@ def md_to_html(md):
             close_list(); i += 1; continue
         if re.match(r'^#{1,4} ', line):
             close_list(); level = len(re.match(r'^(#+) ', line).group(1)); text = line[level+1:].strip()
+            if level == 1:
+                i += 1; continue
             html.append(f'<h{level}>{inline_md(text)}</h{level}>'); i += 1; continue
         if line.strip() in ('---', '***'):
             close_list(); html.append('<hr>'); i += 1; continue
@@ -134,32 +137,40 @@ HEADER = """<header class="header"><div class="wrap header__row">
 <nav class="header__nav"><a href="{home}{guide}">Guides</a><a href="{other}">{other_label}</a></nav>
 </div></header>"""
 
-def page_html(*, lang, title, description, canonical, body, root, home_link, guide_href, lang_href, og_image=None):
+def page_html(*, lang, title, description, canonical, body, root, home_link, guide_href, lang_href, og_image=None, json_ld=None):
     other_label = 'ES' if lang == 'en' else 'EN'
     css_href = root + 'assets/style.css'
+    og_type = 'article' if json_ld else 'website'
+    og_locale = 'en_US' if lang == 'en' else 'es_ES'
+    jsonld_script = ('<script type="application/ld+json">' + json.dumps(json_ld, ensure_ascii=False, separators=(',', ':')) + '</script>') if json_ld else ''
     html = f"""<{chr(33)}DOCTYPE html><html lang="{lang}"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{title}</title><meta name="description" content="{description}">
 <meta name="robots" content="index, follow, max-image-preview:large">
 <link rel="canonical" href="{canonical}">
+<link rel="alternate" type="application/rss+xml" title="Travel Finds RSS" href="{SITE_URL}/feed.xml">
+<meta name="author" content="Travel Finds">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{css_href}">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 100 100%27%3E%3Ccircle cx=%2750%27 cy=%2750%27 r=%2748%27 fill=%27%23173c32%27/%3E%3Ctext x=%2750%27 y=%2765%27 font-size=%2746%27 text-anchor=%27middle%27 fill=%27%23f6f0e4%27%3E%E2%9C%88%3C/text%3E%3C/svg%3E">
-<meta property="og:type" content="article"><meta property="og:title" content="{title}"><meta property="og:description" content="{description}">
+<meta property="og:type" content="{og_type}"><meta property="og:site_name" content="Travel Finds"><meta property="og:locale" content="{og_locale}">
+<meta property="og:title" content="{title}"><meta property="og:description" content="{description}">
 <meta property="og:url" content="{canonical}"><meta property="og:image" content="{og_image or SITE_URL + '/assets/og-cover.png'}">
-<meta name="twitter:card" content="summary_large_image"><meta name="twitter:image" content="{og_image or SITE_URL + '/assets/og-cover.png'}">
+<meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{title}"><meta name="twitter:description" content="{description}"><meta name="twitter:image" content="{og_image or SITE_URL + '/assets/og-cover.png'}">
+{jsonld_script}
 </head><body>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header" data-header><div class="container header-inner">
 <a class="brand" href="{home_link}" aria-label="Travel Finds — home"><span class="brand-mark" aria-hidden="true">✈</span><span>Travel <em>Finds</em></span></a>
-<nav class="site-nav" id="site-nav" aria-label="Navigation" data-nav><a href="{home_link}#finds">Finds</a><a href="{home_link}#how">How it works</a><a href="{guide_href}">Guides</a><a href="{home_link}#search">Search</a></nav>
+<nav class="site-nav" id="site-nav" aria-label="Navigation" data-nav><a href="{home_link}#finds">Finds</a><a href="{home_link}#how">How it works</a><a href="{guide_href}">Guides</a><a href="{home_link}#resources">Resources</a><a href="{home_link}#search">Search</a></nav>
 <div class="header-actions"><a class="lang-pill" href="{lang_href}" hreflang="{'es' if lang == 'en' else 'en'}">{other_label}</a><a class="btn btn--primary btn--small" href="{home_link}#search">Find a trip</a><button class="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="site-nav" data-menu-toggle><span></span></button></div>
 </div></header>
 <main id="main">{body}</main>
 <footer class="site-footer"><div class="container"><div class="footer-grid">
 <div class="footer-brand"><a class="brand" href="{home_link}"><span class="brand-mark" aria-hidden="true">✈</span><span>Travel <em>Finds</em></span></a><p>Independent travel media. We compare flight, stay and travel-essential options so you can spend less and go more often.</p></div>
-<div class="footer-col"><h3>Explore</h3><a href="{home_link}#finds">Finds</a><a href="{home_link}#how">How it works</a><a href="{guide_href}">Guides</a></div>
+<div class="footer-col"><h3>Explore</h3><a href="{home_link}#finds">Finds</a><a href="{home_link}#how">How it works</a><a href="{guide_href}">Guides</a><a href="{home_link}#resources">Resources</a></div>
+<div class="footer-col"><h3>Useful links</h3><a href="https://europa.eu/youreurope/citizens/travel/passenger-rights/air/index_en.htm" target="_blank" rel="noopener">EU passenger rights</a><a href="https://www.caa.co.uk/passengers/" target="_blank" rel="noopener">UK CAA advice</a><a href="https://www.seat61.com/" target="_blank" rel="noopener">Seat61 rail guide</a><a href="https://wwwnc.cdc.gov/travel" target="_blank" rel="noopener">CDC travel health</a></div>
 <div class="footer-col"><h3>Language</h3><a href="{lang_href}" hreflang="{'es' if lang == 'en' else 'en'}">{other_label} version</a><a href="{home_link}#disclosure">Affiliate disclosure</a></div>
 </div><div class="footer-bottom"><span>© 2026 Travel Finds.</span><span class="footer-credit">Design adapted from <a href="https://github.com/RSurya99/trippi" rel="noopener">Trippi</a> (MIT).</span></div></div></footer>
 <script src="{root}assets/site-config.js"></script><script src="{root}assets/main.js"></script></body></html>"""
@@ -198,12 +209,17 @@ def build():
                'sub': 'Practical, no-hype guides to cheaper flights, city breaks and travel essentials.'},
         'es': {'root': '../../', 'home': '../../es.html', 'lang_href': '../blog/', 'label': 'ES',
                'guide': 'Guías de viaje', 'h1': 'Guías de viaje y trucos para ahorrar',
-               'sub': 'Guías prácticas para viajar mejor y pagar menos.'},
+               'sub': 'Guías prácticas para viajar mejor, pagar menos y evitar trampas al reservar.'},
     }
     sources = [('en', ROOT / 'content/seo-en.md', OUT / 'blog'), ('es', ROOT / 'content/seo-es.md', OUT / 'es' / 'blog')]
     for lang, src, base in sources:
         cfg = config[lang]
         arts = parse_articles(src.read_text(encoding='utf-8'), lang)
+        indexing[lang] = []
+        for art in arts:
+            fm = art['fm']
+            indexing[lang].append({'slug': fm['slug'], 'title': fm.get('title', fm['slug']),
+                                   'desc': fm.get('description', ''), 'image': str(fm.get('image', '')).strip()})
         for art in arts:
             fm = art['fm']; slug = fm['slug']
             body_html = md_to_html(art['body'])
@@ -215,12 +231,36 @@ def build():
             if hero:
                 hero_html = f'<figure class="article-hero"><img src="{cfg["root"]}{hero}" alt="{title}" loading="eager" width="1200" height="675"></figure>'
             meta = f'{fm.get("lang", lang).upper()} · Travel Finds guides'
-            head = f'<div class="container" style="padding:56px 0 80px"><article class="article-shell">{hero_html}<h1>{title}</h1><p class="article-meta">{meta}</p><div class="article-body">{body_html}</div></article></div>'
-            html = page_html(lang=lang, title=title + ' | Travel Finds', description=desc, canonical=canonical, body=head,
+            related = [a for a in indexing[lang] if a['slug'] != slug][:3]
+            related_title = 'Related guides' if lang == 'en' else 'Guías relacionadas'
+            related_cards = ''.join(
+                f'<a class="related-card" href="{a["slug"]}.html"><strong>{a["title"]}</strong><span>{a["desc"]}</span></a>'
+                for a in related
+            )
+            related_html = f'<aside class="related-guides"><h2>{related_title}</h2><div class="related-list">{related_cards}</div></aside>' if related_cards else ''
+            image_url = (SITE_URL + '/' + hero) if hero else (SITE_URL + '/assets/og-cover.png')
+            home_name = 'Home' if lang == 'en' else 'Inicio'
+            guides_name = 'Guides' if lang == 'en' else 'Guías'
+            article_ld = {
+                '@context': 'https://schema.org',
+                '@graph': [
+                    {'@type': 'Article', '@id': canonical + '#article', 'headline': title, 'description': desc,
+                     'image': [image_url], 'inLanguage': lang,
+                     'author': {'@type': 'Organization', 'name': 'Travel Finds'},
+                     'publisher': {'@type': 'Organization', 'name': 'Travel Finds', 'url': SITE_URL + '/'},
+                     'mainEntityOfPage': {'@type': 'WebPage', '@id': canonical}},
+                    {'@type': 'BreadcrumbList', 'itemListElement': [
+                        {'@type': 'ListItem', 'position': 1, 'name': home_name, 'item': SITE_URL + '/'},
+                        {'@type': 'ListItem', 'position': 2, 'name': guides_name, 'item': f"{SITE_URL}/{prefix}/"},
+                        {'@type': 'ListItem', 'position': 3, 'name': title, 'item': canonical},
+                    ]},
+                ],
+            }
+            head = f'<div class="container" style="padding:56px 0 80px"><article class="article-shell">{hero_html}<h1>{title}</h1><p class="article-meta">{meta}</p><div class="article-body">{body_html}</div>{related_html}</article></div>'
+            html = page_html(lang=lang, title=title, description=desc, canonical=canonical, body=head,
                              root=cfg['root'], home_link=cfg['home'], guide_href='./', lang_href=cfg['lang_href'],
-                             og_image=(SITE_URL + '/' + hero) if hero else None)
+                             og_image=image_url, json_ld=article_ld)
             (base / f'{slug}.html').write_text(html, encoding='utf-8')
-            indexing[lang].append({'slug': slug, 'title': title, 'desc': desc, 'image': hero})
 
         cards = []
         for a in indexing[lang]:
@@ -243,12 +283,22 @@ def build():
         sm.append(f'  <url><loc>{u}</loc></url>')
     sm.append('</urlset>')
     (OUT / 'sitemap.xml').write_text('\n'.join(sm), encoding='utf-8')
+    rss_items = []
+    for lang in ('en', 'es'):
+        prefix = 'blog' if lang == 'en' else 'es/blog'
+        for a in indexing[lang]:
+            link = f"{SITE_URL}/{prefix}/{a['slug']}.html"
+            rss_items.append(f"<item><title>{xml_escape(a['title'])}</title><link>{link}</link><guid>{link}</guid><description>{xml_escape(a['desc'])}</description></item>")
+    rss = ('<?xml version="1.0" encoding="UTF-8"?><rss version="2.0"><channel>'
+           f'<title>Travel Finds</title><link>{SITE_URL}/</link><description>Independent travel finds and money-saving guides.</description>'
+           f'<language>en</language>{"".join(rss_items)}</channel></rss>')
+    (OUT / 'feed.xml').write_text(rss, encoding='utf-8')
     print('built', len(indexing['en']), 'EN articles,', len(indexing['es']), 'ES articles ->', OUT)
     for u in urls:
         print(' ', u)
 
 
-GENERATED = ['assets', 'blog', 'es', 'index.html', 'es.html', 'robots.txt', 'sitemap.xml', '.nojekyll']
+GENERATED = ['assets', 'blog', 'es', 'index.html', 'es.html', 'robots.txt', 'sitemap.xml', 'feed.xml', '.nojekyll']
 
 def publish():
     """Copy the generated static site from _src/build to the repository root."""

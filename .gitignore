@@ -4,3 +4,5 @@ _src/build/
 __pycache__/
 *.pyc
 .DS_Store
+_src/reports/
+lychee-*.md

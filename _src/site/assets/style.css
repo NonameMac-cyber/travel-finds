@@ -214,3 +214,22 @@ img{display:block;max-width:100%}a{color:inherit}button,input{font:inherit}
 .ta-review p{margin:0 0 8px;color:var(--muted);font-size:13px;line-height:1.5}
 .ta-review__meta{font-size:11px}
 @media(max-width:760px){.ta-location{grid-template-columns:1fr}.ta-location img{min-height:180px}}
+
+/* resources and related guides */
+.resources-section{background:linear-gradient(180deg,rgba(234,223,206,.35),rgba(246,240,228,0))}
+.resource-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.resource-card{display:flex;flex-direction:column;gap:7px;padding:22px;border-radius:18px;background:var(--paper);border:1px solid rgba(23,33,28,.1);text-decoration:none;transition:transform .22s,box-shadow .22s}
+.resource-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-soft)}
+.resource-card strong{font-family:var(--font-display);font-size:20px;line-height:1.15;letter-spacing:-.02em;font-weight:600}
+.resource-card span{color:var(--muted);font-size:12px;line-height:1.55}
+.resource-card::after{content:"↗";margin-top:auto;color:var(--terracotta-dark);font-weight:800;font-size:14px}
+.related-guides{margin-top:54px;padding-top:28px;border-top:1px solid var(--line)}
+.related-guides h2{margin:0 0 18px;font-family:var(--font-display);font-size:30px;letter-spacing:-.03em;font-weight:600}
+.related-list{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.related-card{display:flex;flex-direction:column;gap:7px;padding:18px;border-radius:16px;background:var(--paper);border:1px solid rgba(23,33,28,.1);text-decoration:none;transition:border-color .2s,transform .2s}
+.related-card:hover{border-color:var(--terracotta);transform:translateY(-2px)}
+.related-card strong{font-size:15px;line-height:1.25}
+.related-card span{color:var(--muted);font-size:11px;line-height:1.5}
+.footer-grid{grid-template-columns:1.5fr .7fr .7fr .9fr}
+@media(max-width:980px){.resource-grid{grid-template-columns:repeat(2,1fr)}.related-list{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:760px){.resource-grid,.related-list{grid-template-columns:1fr}.footer-grid{grid-template-columns:1fr 1fr}}
