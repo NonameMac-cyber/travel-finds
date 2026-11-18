@@ -11,10 +11,10 @@ window.TRAVEL_CONFIG = {
   marker: "674170",
   market: "non_ru",
   widget: {
-    // White Label: Tools → Widgets/White Label → promo_id (получить позже;
-    // до этого показываем fallback-кнопки).
-    promoId: "YOUR_WIDGET_PROMO_ID",
-    campaignId: "",
+    // TravelPayouts widget: Aviasales Flights Search Form.
+    // Source project 597756 (Travel-finds), widget 7879, campaign 100.
+    promoId: "7879",
+    campaignId: "100",
     poweredBy: "true",
   },
   // У каждой программы своя короткая ссылка на язык (sub_id seo_en/seo_es
