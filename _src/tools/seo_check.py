@@ -9,8 +9,8 @@ def txt(pattern, s):
     m = re.search(pattern, s, re.I | re.S)
     return re.sub(r"\s+", " ", m.group(1)).strip() if m else ""
 
-def expected(rel):
-    b = SITE.rstrip("/")
+def expected(rel, site=SITE):
+    b = site.rstrip("/")
     if rel == "index.html": return b + "/"
     if rel.endswith("/index.html"): return b + "/" + rel[:-10]
     return b + "/" + rel
@@ -21,6 +21,7 @@ def main():
     ap.add_argument("--site-url", default=SITE)
     ap.add_argument("--report", default="_src/reports/seo-report.json")
     args = ap.parse_args()
+    site = args.site_url.rstrip("/")
     build = Path(args.build)
     if not (build / "index.html").exists():
         print("ERROR: run build_site.py first", file=sys.stderr)
@@ -42,7 +43,7 @@ def main():
         if not desc: add("description", "missing meta description")
         elif not 50 <= len(desc) <= 160: add("warn-description", f"description length {len(desc)}")
         if not canonical: add("canonical", "missing canonical")
-        elif canonical.rstrip("/") != expected(rel).rstrip("/"): add("canonical", f"expected {expected(rel)}")
+        elif canonical.rstrip("/") != expected(rel, site).rstrip("/"): add("canonical", f"expected {expected(rel, site)}")
         if len(h1) != 1: add("h1", f"found {len(h1)} h1 tags")
         if not lang: add("lang", "missing html lang")
         if not re.search(r"<meta\s+name=[\"\x27]viewport[\"\x27]", s, re.I): add("viewport", "missing viewport meta")
@@ -67,7 +68,7 @@ def main():
         rel = p.relative_to(build).as_posix()
         if expected(rel) not in sitemap:
             warnings.append({"page": rel, "type": "warn-sitemap", "message": "URL missing from sitemap.xml"})
-    report = {"generated_at": datetime.now(timezone.utc).isoformat(), "site_url": SITE,
+    report = {"generated_at": datetime.now(timezone.utc).isoformat(), "site_url": site,
               "pages_checked": len(pages), "errors": errors, "warnings": warnings}
     rp = Path(args.report); rp.parent.mkdir(parents=True, exist_ok=True)
     rp.write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
