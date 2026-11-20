@@ -11,6 +11,7 @@ from xml.sax.saxutils import escape as xml_escape
 ROOT = Path(__file__).resolve().parents[1]
 OUT = ROOT / 'build'
 SITE_URL = 'https://nonamemac-cyber.github.io/travel-finds'
+INDEXNOW_KEY = (ROOT / 'site' / 'indexnow-key.txt').read_text(encoding='utf-8').strip()
 LINKS = json.load(open(ROOT / 'config/links.generated.json', encoding='utf-8'))
 
 NAMES = {'kiwi':'Kiwi.com','klook':'Klook','saily':'Saily','gocity':'Go City','yesim':'Yesim','airalo':'Airalo',
@@ -336,6 +337,7 @@ def build():
     shutil.rmtree(stash, ignore_errors=True)
 
     shutil.copytree(ROOT / 'site/assets', OUT / 'assets', dirs_exist_ok=True)
+    (OUT / f'{INDEXNOW_KEY}.txt').write_text(INDEXNOW_KEY, encoding='utf-8')
     (OUT / 'blog').mkdir(parents=True, exist_ok=True)
     (OUT / 'es' / 'blog').mkdir(parents=True, exist_ok=True)
 
@@ -444,7 +446,7 @@ def build():
         print(' ', u)
 
 
-GENERATED = ['assets', 'blog', 'es', 'index.html', 'es.html', 'privacy.html', 'cookies.html', 'about.html', 'robots.txt', 'sitemap.xml', 'feed.xml', '.nojekyll']
+GENERATED = ['assets', 'blog', 'es', 'index.html', 'es.html', 'privacy.html', 'cookies.html', 'about.html', 'robots.txt', 'sitemap.xml', 'feed.xml', '.nojekyll', f'{INDEXNOW_KEY}.txt']
 
 def publish():
     """Copy the generated static site from _src/build to the repository root."""
