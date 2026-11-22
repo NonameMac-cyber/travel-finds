@@ -133,6 +133,8 @@ article hr{border:0;border-top:1px solid var(--line);margin:28px 0}
 .footer a{color:var(--muted)}.lang-switch{border:1px solid var(--line);padding:4px 10px;border-radius:999px;font-size:13px}
 """
 
+DRIVE_SCRIPT = '<script async src="https://emrld.ltd/NTk3NzU2.js?t=597756"></script>'
+
 HEADER = """<header class="header"><div class="wrap header__row">
 <a class="logo" href="{home}"><span class="logo__mark" aria-hidden="true">✈</span>Travel Finds</a>
 <nav class="header__nav"><a href="{home}{guide}">Guides</a><a href="{other}">{other_label}</a></nav>
@@ -159,6 +161,7 @@ def page_html(*, lang, title, description, canonical, body, root, home_link, gui
 <meta property="og:url" content="{canonical}"><meta property="og:image" content="{og_image or SITE_URL + '/assets/og-cover.png'}">
 <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="{title}"><meta name="twitter:description" content="{description}"><meta name="twitter:image" content="{og_image or SITE_URL + '/assets/og-cover.png'}">
 {jsonld_script}
+{DRIVE_SCRIPT}
 </head><body>
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="site-header" data-header><div class="container header-inner">
