@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://nonamemac-cyber.github.io/travel-finds/sitemap.xml
